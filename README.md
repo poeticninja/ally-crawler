@@ -65,3 +65,4 @@ npm run test
 - Add better styling to the report
 - Add history of results generated. A folder structure like this might work, {sitename}-{timestamp}/dataset-ally.json. Currently we delete the whole results folder each time a new crawl is run.
 - Add ability to pass in a report file to the report UI. Maybe it just reads all results files in the results folder and you can just choose.
+- Add ability to pass your own URL cleaner function options. Currently we remove the hash and query params from the url and compare that url to any others we have already crawled. By passing in `--hash` or `--query` you can keep those in the url. This is useful if you have a site that uses hash routing.
