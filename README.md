@@ -63,3 +63,5 @@ npm run test
 #### TODO
 
 - Add better styling to the report
+- Add history of results generated. A folder structure like this might work, {sitename}-{timestamp}/dataset-ally.json. Currently we delete the whole results folder each time a new crawl is run.
+- Add ability to pass in a report file to the report UI. Maybe it just reads all results files in the results folder and you can just choose.
