@@ -115,6 +115,7 @@ export function Table({ data, group }) {
         return <ExpandedRowDetails data={row} />;
       }}
       pagination
+      paginationPerPage={20}
       paginationComponentOptions={{
         selectAllRowsItem: true,
       }}
