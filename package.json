@@ -7,9 +7,10 @@
     "node": ">=18.1.0"
   },
   "scripts": {
-    "test": "npx playwright test",
+    "test": "start-server-and-test start-example-server http://localhost:3151 test-runner",
     "report": "parcel src/report/index.html",
-    "start-example-server": "node tests/mock/server.js"
+    "start-example-server": "node tests/mock/server.js",
+    "test-runner": "npx playwright test"
   },
   "directories": {
     "src": "src"
@@ -27,7 +28,8 @@
     "playwright": "1.26.1",
     "process": "0.11.10",
     "react": "18.2.0",
-    "react-data-table-component": "7.5.3"
+    "react-data-table-component": "7.5.3",
+    "start-server-and-test": "1.14.0"
   },
   "keywords": [],
   "author": "saul.maddox@gmail.com",

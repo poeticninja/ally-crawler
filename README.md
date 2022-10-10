@@ -4,7 +4,7 @@ ally-crawler is a website crawler that will scan a website to find all the urls 
 
 ### Install
 
-Make sure you have the correct version of node installed based on the .nvmrc file or the engines section of the package.json file. After than you will need to install the dependencies with `npm install` or `yarn install`.
+Make sure you have the correct version of node installed based on the .nvmrc file or the engines section of the package.json file. After than you will need to install the dependencies with `npm install`.
 
 ### Run
 
@@ -23,7 +23,7 @@ Usage: crawl [options]
 a website crawler that collects urls and scans for a11y issues
 
 Options:
-  -u, --url [url...]            one or more urls to crawl
+  -u, --url [url...]            one or more urls to crawl. please use the full url.
   -s,--sleep [milliseconds]     Sets the time before a worker starts the next crawl. This is to help avoid being blocked. (default: "200")
   -m,--max <number>             Sets the max number of requests to crawl. This is useful for testing.
   -o, --output-folder [folder]  the folder to output the results (default: "results")

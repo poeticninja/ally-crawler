@@ -10,13 +10,15 @@ test.describe("run the shell command to crawl each page", () => {
   let resultsAlly;
 
   test.beforeAll(async () => {
-    // run the shell command to crawl the url
-    execSync(
-      `node ${path.join(
-        __dirname,
-        "../src/crawl.js"
-      )} --url http://localhost:3151 -o tests/results`
-    );
+
+    // shell command to crawl the url
+    const runCrawler = `node ${path.join(
+      __dirname,
+      "../src/crawl.js"
+    )} --url http://localhost:3151 -o tests/results`;
+
+    // run the shell command
+    execSync(runCrawler);
 
     // load the results from the json file after the crawl is complete
     resultsUrls = JSON.parse(

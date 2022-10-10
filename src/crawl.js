@@ -20,6 +20,11 @@ cli
     "Sets the max number of requests to crawl. This is useful for testing."
   )
   .option(
+    "-c,--concurrency <number>",
+    "Sets the max number of concurrent requests happening at a time.",
+    "4"
+  )
+  .option(
     "-o, --output-folder [folder]",
     "the folder to output the results",
     "results"
@@ -70,6 +75,7 @@ const init = async () => {
   // setup the crawler
   const crawler = new PlaywrightCrawler({
     maxRequestsPerCrawl: cliOptions.max && parseInt(cliOptions.max), // set the max if you don't want to crawl a whole site. very useful for testing.
+    maxConcurrency: cliOptions.concurrency && parseInt(cliOptions.concurrency),
     async requestHandler({ request, page, enqueueLinks, log }) {
       const currentCleanUrl = cleanUrl(request.loadedUrl);
       // log the current url in process
