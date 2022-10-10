@@ -1,0 +1,33 @@
+.bg-dark {
+  background-color: YellowGreen;
+}
+.bg-light {
+  background-color: YellowGreen;
+}
+.text-dark {
+  color: #444444;
+}
+.text-light {
+  color: #cccccc;
+}
+.border {
+  border: 1px solid #888888;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 1rem;
+}
+.p-4 {
+  padding: 1.5rem;
+}
+.m-2 {
+  margin: 0.5rem;
+}
+.m-3 {
+  margin: 1rem;
+}
+.m-4 {
+  margin: 1.5rem;
+}

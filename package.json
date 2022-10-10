@@ -1,0 +1,35 @@
+{
+  "name": "ally-crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/crawl.js",
+  "engine": {
+    "node": ">=18.1.0"
+  },
+  "scripts": {
+    "test": "npx playwright test",
+    "report": "parcel src/report/index.html",
+    "start-example-server": "node tests/mock/server.js"
+  },
+  "directories": {
+    "src": "src"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "4.4.5",
+    "commander": "9.4.1",
+    "crawlee": "3.0.4"
+  },
+  "devDependencies": {
+    "@hapi/hapi": "20.2.2",
+    "@hapi/inert": "7.0.0",
+    "@playwright/test": "1.27.0",
+    "parcel": "2.7.0",
+    "playwright": "1.26.1",
+    "process": "0.11.10",
+    "react": "18.2.0",
+    "react-data-table-component": "7.5.3"
+  },
+  "keywords": [],
+  "author": "saul.maddox@gmail.com",
+  "license": "MIT"
+}
