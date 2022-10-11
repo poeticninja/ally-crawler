@@ -9,6 +9,7 @@
   "scripts": {
     "test": "start-server-and-test start-example-server http://localhost:3151 test-runner",
     "report": "parcel src/report/index.html",
+    "ally-to-csv": "node src/convert-report.js",
     "start-example-server": "node tests/mock/server.js",
     "test-runner": "npx playwright test"
   },
@@ -18,18 +19,22 @@
   "dependencies": {
     "@axe-core/playwright": "4.4.5",
     "commander": "9.4.1",
-    "crawlee": "3.0.4"
+    "crawlee": "3.0.4",
+    "json2csv": "5.0.7"
   },
   "devDependencies": {
     "@hapi/hapi": "20.2.2",
     "@hapi/inert": "7.0.0",
     "@playwright/test": "1.27.0",
+    "assert": "2.0.0",
     "parcel": "2.7.0",
     "playwright": "1.26.1",
     "process": "0.11.10",
+    "querystring-es3": "0.2.1",
     "react": "18.2.0",
     "react-data-table-component": "7.5.3",
-    "start-server-and-test": "1.14.0"
+    "start-server-and-test": "1.14.0",
+    "url": "0.11.0"
   },
   "keywords": [],
   "author": "saul.maddox@gmail.com",

@@ -1,7 +1,7 @@
 // react component that displays a table of results from the dataset-ally.json file
 import React, { useState } from "react";
-
 import { Table } from "./table";
+import flattenAllyResults from "../../utils/flatten-ally-results";
 import results from "../../../results/dataset-ally.json";
 
 // function that takes in a dataset and groups it by the given key
@@ -26,36 +26,8 @@ function groupDataToTableFormat(dataset, group) {
   return convertGroupByResultsToArray(groupByResults, group);
 }
 
-// flatten the results violations into a single array
-const violations = results.reduce((acc, result) => {
-  // keep the url property from the result
-  const url = result.url;
-  // map the violations to include the url
-  const violations = result.violations.map((violation) => ({
-    ...violation,
-    url,
-  }));
-  // add the violations to the accumulator
-  return [...acc, ...violations];
-}, []);
-
-// flatten the violations nodes into a single array
-const nodes = violations.reduce((acc, violation) => {
-  // keep properties from the violation
-  const { nodes, id, ...rest } = violation;
-
-  // change id to violationId so that it doesnt conflict with the data table id
-  const violationId = id;
-
-  // map the nodes to include violation properties and add the violation id
-  const mappedNodes = nodes.map((node) => ({
-    violationId,
-    ...node,
-    ...rest,
-  }));
-  // add the nodes to the accumulator
-  return [...acc, ...mappedNodes];
-}, []);
+// flatten the results from axe-core to something more readable in a table format
+const nodes = flattenAllyResults(results);
 
 // dropdown options for the group by select
 const groupByOptions = [

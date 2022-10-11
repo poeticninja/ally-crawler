@@ -3,7 +3,8 @@ const cli = require("commander");
 const fs = require("fs");
 const path = require("path");
 
-const { cleanUrl, scanAllyOnPage } = require("./utils");
+const scanAllyOnPage = require("./utils/scan-ally-on-page");
+const cleanUrl = require("./utils/clean-url");
 
 // setup cli options and documentation
 cli
