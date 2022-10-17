@@ -10,7 +10,6 @@ test.describe("run the shell command to crawl each page", () => {
   let resultsAlly;
 
   test.beforeAll(async () => {
-
     // shell command to crawl the url
     const runCrawler = `node ${path.join(
       __dirname,
@@ -73,9 +72,9 @@ test.describe("run the shell command to crawl each page", () => {
     );
   });
 
-  test("ally data should return 4 results with correct urls", () => {
+  test("ally data should return 18 results with correct urls", () => {
     // expect the results to equal 4 because there are 4 pages on the site
-    expect(resultsAlly.length).toBe(4);
+    expect(resultsAlly.length).toBe(18);
 
     // expect the reults objects to have a url property
     expect(resultsAlly[0]).toHaveProperty("url");
@@ -102,62 +101,35 @@ test.describe("run the shell command to crawl each page", () => {
     );
   });
 
-  test("ally data should have 12 total violations", () => {
+  test("ally data should have 18 total violations", () => {
     // expect the results to equal 18 because there are 18 violations on the site
-    const combinedViolations = resultsAlly.reduce((acc, cur) => {
-      return acc.concat(cur.violations);
-    }, []);
-    expect(combinedViolations.length).toBe(12);
+    expect(resultsAlly.length).toBe(18);
   });
 
   test("ally data should have 6 image alt tag missing issues", () => {
     // expect the results to equal 6 because there are 6 image alt tag missing issues on the site
-    const combinedViolations = resultsAlly.reduce((acc, cur) => {
-      return acc.concat(cur.violations);
-    }, []);
-
-    const imageAltTagMissing = combinedViolations.filter(
-      (violation) => violation.id === "image-alt"
+    const imageAltTagMissing = resultsAlly.filter(
+      (violation) => violation.violationId === "image-alt"
     );
 
-    const combineViolationNodes = imageAltTagMissing.reduce((acc, cur) => {
-      return acc.concat(cur.nodes);
-    }, []);
-
-    expect(combineViolationNodes.length).toBe(6);
+    expect(imageAltTagMissing.length).toBe(6);
   });
 
   test("ally data should have 4 inputs missing labels missing issues", () => {
     // expect the results to equal 4 because there are 4 inputs missing labels missing issues on the site
-    const combinedViolations = resultsAlly.reduce((acc, cur) => {
-      return acc.concat(cur.violations);
-    }, []);
-
-    const inputsMissingLabels = combinedViolations.filter(
-      (violation) => violation.id === "label"
+    const inputsMissingLabels = resultsAlly.filter(
+      (violation) => violation.violationId === "label"
     );
 
-    const combineViolationNodes = inputsMissingLabels.reduce((acc, cur) => {
-      return acc.concat(cur.nodes);
-    }, []);
-
-    expect(combineViolationNodes.length).toBe(4);
+    expect(inputsMissingLabels.length).toBe(4);
   });
 
   test("ally data should have 8 contrast issues", () => {
     // expect the results to equal 8 because there are 8 contrast issues on the site
-    const combinedViolations = resultsAlly.reduce((acc, cur) => {
-      return acc.concat(cur.violations);
-    }, []);
-
-    const contrastIssues = combinedViolations.filter(
-      (violation) => violation.id === "color-contrast"
+    const contrastIssues = resultsAlly.filter(
+      (violation) => violation.violationId === "color-contrast"
     );
 
-    const combineViolationNodes = contrastIssues.reduce((acc, cur) => {
-      return acc.concat(cur.nodes);
-    }, []);
-
-    expect(combineViolationNodes.length).toBe(8);
+    expect(contrastIssues.length).toBe(8);
   });
 });

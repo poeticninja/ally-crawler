@@ -1,10 +1,12 @@
 const { PlaywrightCrawler, Dataset, sleep } = require("crawlee");
 const cli = require("commander");
+const { parse } = require("json2csv");
 const fs = require("fs");
 const path = require("path");
 
 const scanAllyOnPage = require("./utils/scan-ally-on-page");
 const cleanUrl = require("./utils/clean-url");
+const flattenAllyResults = require("./utils/flatten-ally-results");
 
 // setup cli options and documentation
 cli
@@ -87,7 +89,7 @@ const init = async () => {
         // collect all of the urls on the page
         const datasetUrls = await Dataset.open(datasetNameUrls);
         const pageUrl = { url: request.loadedUrl };
-        console.log(request.loadedUrl);
+
         await datasetUrls.pushData(pageUrl);
       }
 
@@ -128,26 +130,51 @@ const init = async () => {
     fs.mkdirSync(pathToOutputFolder);
   }
 
-  const datasetUrls = await Dataset.open(datasetNameUrls);
-  const datasetAlly = await Dataset.open(datasetNameAlly);
-  const urlsData = await datasetUrls.getData();
-  const allyData = await datasetAlly.getData();
-
   // if the urls scan is enabled. default is true
   if (cliOptions.urls !== false) {
-    // write the urls to a file
-    fs.writeFileSync(
-      pathToOutputFileUrls,
-      JSON.stringify(urlsData?.items, null, 2)
-    );
+    try {
+      const datasetUrls = await Dataset.open(datasetNameUrls);
+      const urlsData = await datasetUrls.getData();
+
+      // write the urls to a file
+      fs.writeFileSync(
+        pathToOutputFileUrls,
+        JSON.stringify(urlsData?.items, null, 2)
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
   // if the ally scan is enabled. default is true
   if (cliOptions.ally !== false) {
-    // write the ally to a file
-    fs.writeFileSync(
-      pathToOutputFileAlly,
-      JSON.stringify(allyData?.items, null, 2)
-    );
+    try {
+      const datasetAlly = await Dataset.open(datasetNameAlly);
+      const allyData = await datasetAlly.getData();
+      const flattenedData = flattenAllyResults(allyData?.items);
+
+      // write the ally to a JSON file
+      fs.writeFileSync(
+        pathToOutputFileAlly,
+        JSON.stringify(flattenedData, null, 2)
+      );
+
+      // write the ally to a CSV file
+      const fields = [
+        "violationId",
+        "url",
+        "impact",
+        "help",
+        "failureSummary",
+        "html",
+      ];
+      const opts = { fields };
+
+      const csv = parse(flattenedData, opts);
+
+      fs.writeFileSync(pathToOutputFileAlly.replace(".json", ".csv"), csv);
+    } catch (err) {
+      console.error(err);
+    }
   }
 };
 
